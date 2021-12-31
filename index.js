@@ -4,6 +4,9 @@ const mongoose = require("mongoose");
 const userRoutes = require("./routes/user-routes");
 
 const MONGODB_URI = "mongodb://localhost:27017/mern-learn";
+
+const app = express();
+
 const connectDB = async () => {
   try {
     await mongoose.connect(MONGODB_URI, {
@@ -20,7 +23,8 @@ const connectDB = async () => {
   }
 };
 connectDB();
-const app = express();
+
+app.use(express.json());
 
 app.use("/api/auth", userRoutes);
 
