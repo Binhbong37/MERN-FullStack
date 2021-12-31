@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const userRoutes = require("./routes/user-routes");
+const postRoutes = require("./routes/post-routes");
 
 const MONGODB_URI = "mongodb://localhost:27017/mern-learn";
 
@@ -27,5 +28,6 @@ connectDB();
 app.use(express.json());
 
 app.use("/api/auth", userRoutes);
+app.use("/api/posts", postRoutes);
 
 app.listen(5000);

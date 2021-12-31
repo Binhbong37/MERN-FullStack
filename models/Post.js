@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
   title: { type: String, require: true },
-  description: { type: String, require: true },
-  uri: { type: String, require: true },
+  description: { type: String },
+  uri: { type: String },
   status: {
     type: String,
     enum: ["TO LEARN", "LEARNING", "LEARNED"],
