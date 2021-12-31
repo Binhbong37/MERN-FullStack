@@ -1,0 +1,49 @@
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "Binh Bong",
+    "password": "1234567"
+}
+
+
+###
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "Binh Bong",
+    "password": "1234567"
+}
+
+###
+POST http://localhost:5000/api/posts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWNlYzM3ZTlkZDE5YTQzNDg3OTUxOWYiLCJpYXQiOjE2NDA5NDA0MzF9.bMVFl6eqXfG54BgLrJiuHKxV4hkupqO4pe8YYaEkzDY
+
+{
+    "title": "This is a famous building",
+    "description": "a place is very interested in",
+    "url": "lazada.com",
+    "status":"LEARNED"
+}
+
+###
+GET http://localhost:5000/api/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWNlYjQyZDUxMmZmZDI3ZDg3YjA0ZDMiLCJpYXQiOjE2NDA5Mzc1NjJ9.Po_JJ6wW1uaR5m9Gt5FpXbkp4o7q_upt6clVwh2lUyE
+
+###
+PUT http://localhost:5000/api/posts/61ceb562b9238e3d54a677bf
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWNlYjQyZDUxMmZmZDI3ZDg3YjA0ZDMiLCJpYXQiOjE2NDA5Mzc1NjJ9.Po_JJ6wW1uaR5m9Gt5FpXbkp4o7q_upt6clVwh2lUyE
+
+{
+    "title": "Update title",
+    "description": "Nodejs",
+    "url": "shoope.com",
+    "status": "LEARNING"
+}
+
+###
+DELETE  http://localhost:5000/api/posts/61ceb562b9238e3d54a677bf
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWNlYjQyZDUxMmZmZDI3ZDg3YjA0ZDMiLCJpYXQiOjE2NDA5Mzc1NjJ9.Po_JJ6wW1uaR5m9Gt5FpXbkp4o7q_upt6clVwh2lUyE

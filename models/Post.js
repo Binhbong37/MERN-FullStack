@@ -5,12 +5,12 @@ const Schema = mongoose.Schema;
 const postSchema = new Schema({
   title: { type: String, require: true },
   description: { type: String },
-  uri: { type: String },
+  url: { type: String },
   status: {
     type: String,
     enum: ["TO LEARN", "LEARNING", "LEARNED"],
   },
-  userId: { type: Schema.Types.ObjectId, ref: "User", require: true },
+  user: { type: Schema.Types.ObjectId, ref: "User", require: true },
 });
 
 module.exports = mongoose.model("Post", postSchema);
