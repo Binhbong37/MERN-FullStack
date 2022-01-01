@@ -1,36 +1,26 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 const mongoose = require("mongoose");
 
-const userRoutes = require("./routes/user-routes");
-const postRoutes = require("./routes/post-routes");
-
+const postsRoutes = require("./routes/posts-routes");
 const MONGODB_URI = "mongodb://localhost:27017/mern-learn";
-const PORT = 5000;
+const PORT = process.env.port || 5000;
 
 const app = express();
 
-const connectDB = async () => {
-  try {
-    await mongoose.connect(MONGODB_URI, {
-      useCreateIndex: true,
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-    });
-
-    console.log("DB CONNECTED ");
-  } catch (error) {
-    console.log(error.message);
-    process.exit(1);
-  }
-};
-connectDB();
-
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true, limit: "30mb" }));
+app.use(cors());
 
-app.use("/api/auth", userRoutes);
-app.use("/api/posts", postRoutes);
+app.use("/posts", postsRoutes);
 
-app.listen(PORT, () => {
-  console.log(`app starting port ${PORT}`);
-});
+mongoose
+  .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`app starting port ${PORT}`);
+    });
+    console.log("CONNECT DB SUCCESSFULLY");
+  })
+  .catch((err) => console.log(err));

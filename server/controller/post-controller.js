@@ -1,109 +1,51 @@
-const Post = require("../models/Post");
+const Post = require("../models/Posts-model");
 
-// [GET] /api/posts
-exports.getPosts = async (req, res, next) => {
+// [GET] /posts/
+exports.getPosts = async (req, res) => {
   try {
-    const posts = await Post.find({ user: req.userId }).populate(
-      "user",
-      "username"
+    const posts = await Post.find();
+    console.log(posts);
+
+    res.status(200).json({ posts });
+  } catch (error) {
+    res.status(500).json({
+      error,
+    });
+  }
+};
+
+// [POST] /posts/
+exports.postCreatePost = async (req, res) => {
+  try {
+    const newPost = req.body;
+    const savePost = new Post(newPost);
+    await savePost.save();
+    console.log("Created POST");
+
+    res.status(200).json(savePost);
+  } catch (error) {
+    res.status(500).json({
+      error,
+    });
+  }
+};
+
+// [UPDATE] /posts/
+exports.updatePost = async (req, res) => {
+  try {
+    const updatePost = req.body;
+    const newPost = await Post.findOneAndUpdate(
+      { _id: updatePost._id },
+      updatePost,
+      { new: true }
     );
 
-    res.json({
-      message: "successfully method GET",
-      posts,
-    });
+    console.log("UPDATED POST");
+
+    res.status(200).json(newPost);
   } catch (error) {
-    console.log(error);
-  }
-};
-
-// [POST] /api/posts
-exports.postPosts = async (req, res, next) => {
-  const { title, description, url, status } = req.body;
-  if (!title) {
-    return res
-      .status(400)
-      .json({ success: false, message: "Title is required!" });
-  }
-  try {
-    const newPost = new Post({
-      title,
-      description,
-      url: url.startsWith("https://") ? url : `https://${url}`,
-      status: status || "TO LEARN",
-      user: req.userId,
+    res.status(500).json({
+      error,
     });
-
-    await newPost.save();
-
-    res.json({ success: true, message: "Success learning!!" });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ success: false, message: "Internet server is Sap" });
   }
-};
-
-// [PUT] /api/posts/:id
-exports.updatePost = async (req, res, next) => {
-  const postId = req.params.id;
-  const { title, description, url, status } = req.body;
-  if (!title) {
-    return res
-      .status(400)
-      .json({ success: false, message: "Title is required!" });
-  }
-  try {
-    let updatePost = {
-      title,
-      description: description || "",
-      url: (url.startsWith("https://") ? url : `https://${url}`) || "",
-      status: status || "TO LEARN",
-    };
-
-    const postUpdateCondition = {
-      _id: postId,
-      user: req.userId,
-    };
-    updatePost = await Post.findOneAndUpdate(postUpdateCondition, updatePost, {
-      new: true,
-    });
-
-    // Check tiep dk
-    if (!updatePost) {
-      return res.status(401).json({
-        success: true,
-        message: "Post not found or user not authorized",
-      });
-    }
-
-    res.json({
-      success: true,
-      message: "Updated !!!",
-      posts: updatePost,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ success: false, message: "Internet server is Sap" });
-  }
-};
-
-// [DELETE] /api/post/:id
-exports.deletePost = async (req, res, next) => {
-  const postId = req.params.id;
-  try {
-    const postDeleteCondition = { _id: postId, user: req.userId };
-    const deletePost = await Post.findOneAndDelete(postDeleteCondition);
-
-    // Check xem co nguoi dung khong
-    if (!deletePost) {
-      return res.status(401).json({
-        success: false,
-        message: "Not delete",
-      });
-    }
-    res.json({
-      success: true,
-      message: "DELETED !!!",
-    });
-  } catch (error) {}
 };

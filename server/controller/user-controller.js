@@ -4,6 +4,27 @@ const argon2 = require("argon2");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
+// [GET] /api/auth/
+exports.getUsers = async (req, res, next) => {
+  try {
+    const user = User.findById(req.userId).select("-password");
+
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "User not found!!",
+      });
+    }
+
+    res.json({
+      success: true,
+      user,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // [POST] /api/auth/register
 exports.postUsers = async (req, res, next) => {
   const { username, password } = req.body;
@@ -56,14 +77,14 @@ exports.postLogin = async (req, res, next) => {
     if (!user) {
       return res
         .status(400)
-        .json({ success: false, message: "Incorrect email or password" });
+        .json({ success: false, message: "Incorrect user or password" });
     }
     // Check pass
     const passwordValid = await argon2.verify(user.password, password);
     if (!passwordValid) {
       res
         .status(400)
-        .json({ success: false, message: "Incorrect email or password" });
+        .json({ success: false, message: "Incorrect user or password" });
     }
 
     // PASS HET
