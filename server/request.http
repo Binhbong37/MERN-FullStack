@@ -1,25 +1,25 @@
-POST http://localhost:5000/api/auth/register
+POST http://localhost:5000/api/users/register
 Content-Type: application/json
 
 {
     "username": "Binh Bong",
-    "password": "1234567"
+    "password": "12345678"
 }
 
 
 ###
-POST http://localhost:5000/api/auth/login
+POST http://localhost:5000/api/users/login
 Content-Type: application/json
 
 {
     "username": "Binh Bong",
-    "password": "1234567"
+    "password": "12345678"
 }
 
 ###
 POST http://localhost:5000/api/posts
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWNlYzM3ZTlkZDE5YTQzNDg3OTUxOWYiLCJpYXQiOjE2NDA5NDA0MzF9.bMVFl6eqXfG54BgLrJiuHKxV4hkupqO4pe8YYaEkzDY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWVlMmViMzEzMTE3OTI3NjQ4MmMwNzEiLCJpYXQiOjE2NDI5OTk1Njd9.GvgzJV3kN88jJy4xUKUFgjRcicDQUTKSMC9hmKZrBbU
 
 {
     "title": "This is a famous building",
@@ -30,20 +30,20 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWNlY
 
 ###
 GET http://localhost:5000/api/posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWNlYjQyZDUxMmZmZDI3ZDg3YjA0ZDMiLCJpYXQiOjE2NDA5Mzc1NjJ9.Po_JJ6wW1uaR5m9Gt5FpXbkp4o7q_upt6clVwh2lUyE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWVlMmViMzEzMTE3OTI3NjQ4MmMwNzEiLCJpYXQiOjE2NDI5OTk1Njd9.GvgzJV3kN88jJy4xUKUFgjRcicDQUTKSMC9hmKZrBbU
 
 ###
-PUT http://localhost:5000/api/posts/61ceb562b9238e3d54a677bf
+PUT http://localhost:5000/api/posts/61ee2f2d131179276482c072
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWNlYjQyZDUxMmZmZDI3ZDg3YjA0ZDMiLCJpYXQiOjE2NDA5Mzc1NjJ9.Po_JJ6wW1uaR5m9Gt5FpXbkp4o7q_upt6clVwh2lUyE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWVlMmViMzEzMTE3OTI3NjQ4MmMwNzEiLCJpYXQiOjE2NDI5OTk1Njd9.GvgzJV3kN88jJy4xUKUFgjRcicDQUTKSMC9hmKZrBbU
 
 {
-    "title": "Update title",
+    "title": "This is a famous building update",
     "description": "Nodejs",
     "url": "shoope.com",
     "status": "LEARNING"
 }
 
 ###
-DELETE  http://localhost:5000/api/posts/61ceb562b9238e3d54a677bf
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWNlYjQyZDUxMmZmZDI3ZDg3YjA0ZDMiLCJpYXQiOjE2NDA5Mzc1NjJ9.Po_JJ6wW1uaR5m9Gt5FpXbkp4o7q_upt6clVwh2lUyE
+DELETE  http://localhost:5000/api/posts/61ee2f2d131179276482c072
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWVlMmViMzEzMTE3OTI3NjQ4MmMwNzEiLCJpYXQiOjE2NDI5OTk1Njd9.GvgzJV3kN88jJy4xUKUFgjRcicDQUTKSMC9hmKZrBbU

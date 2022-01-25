@@ -1,20 +1,19 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
 const postSchema = new Schema(
-  {
-    title: { type: String, require: true },
-    content: { type: String, require: true },
-    attachment: { type: String },
-    author: {
-      type: String,
-      require: true,
-      default: "Anonymous",
+    {
+        title: { type: String, require: true },
+        description: { type: String },
+        url: { type: String },
+        status: {
+            type: String,
+            enum: ['TO LEARN', 'LEARNING', 'LEARNED'],
+        },
+        user: { type: Schema.Types.ObjectId, ref: 'User' },
     },
-    likeCount: { type: Number, default: 0 },
-  },
-  { timestamps: true }
+    { timestamps: true }
 );
 
-module.exports = mongoose.model("Post", postSchema);
+module.exports = mongoose.model('Post', postSchema);

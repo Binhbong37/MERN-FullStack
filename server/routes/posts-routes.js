@@ -1,15 +1,17 @@
-const express = require("express");
+const express = require('express');
 
-// const verify = require("../middleware/middleware");
+const verify = require('../middleware/middleware');
 
 const router = express.Router();
 
-const postController = require("../controller/post-controller");
+const postController = require('../controller/post-controller');
 
-router.get("/", postController.getPosts);
+router.get('/', verify, postController.getPosts);
 
-router.post("/", postController.postCreatePost);
+router.post('/', verify, postController.postCreatePost);
 
-router.post("/update", postController.updatePost);
+router.put('/:id', verify, postController.updatePost);
+
+router.delete('/:id', verify, postController.deletePost);
 
 module.exports = router;
